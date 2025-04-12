@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Lobster+Two&display=swap");
+
+:root{
+   --black: rgba(0, 0, 0, 0.1);
+   --blue: rgb(13, 145, 233);
+   --white : #fff;
+   --grey : #555;
+}
+.accordion {
+  background: rgb(96, 172, 223);
+  width: 1200px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 15px  var(--black);
+  overflow: hidden;
+  margin: 30px 40px;
+}
+
+.accordion__item {
+  border-bottom: 1px solid var(--blue);
+}
+
+.accordion__title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 20px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--bluevy);
+  background: var(--white);
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.accordion__title:hover {
+  background: var(--white);
+}
+
+.accordion__icon {
+  font-size: 20px;
+  color: var(--blue);
+  transition: transform 0.3s ease-in-out;
+}
+
+.accordion__content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+  background: var(--white);
+}
+
+.accordion__content-inner {
+  padding: 0 20px;
+}
+
+.accordion__content p {
+  margin: 15px 0;
+  font-size: 16px;
+  color: var(--grey);
+}
+
+
+.is-expanded .accordion__content {
+  max-height: 500px;
+  padding: 15px 20px;
+}
+
+.is-expanded .accordion__icon {
+  transform: rotate(180deg);
+}
