@@ -1,0 +1,20 @@
+@media (max-width: 780px) {
+  .filterBtn{
+    display: grid;
+    grid-template-columns: auto auto;
+  }
+
+  .customCards{
+    padding: 0 4rem;
+  }
+}
+
+@media (max-width: 550px) {
+  .filterBtn{
+    display: grid;
+    grid-template-columns: auto auto;
+  }
+  .customCards{
+    padding: 0 5rem;
+  }
+}

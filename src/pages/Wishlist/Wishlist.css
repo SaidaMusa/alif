@@ -1,0 +1,21 @@
+.wishlist{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8rem 0;
+  letter-spacing: 2px;
+}
+
+.wishlist .icon{
+  padding: 20px 0;
+}
+
+.wishlist h2{
+  padding: 15px 0;
+}
+
+.wishlist .wishBtn{
+  padding: 15px 10px;
+  margin: 20px 0;
+}

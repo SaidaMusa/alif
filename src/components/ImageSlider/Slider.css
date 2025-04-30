@@ -1,0 +1,138 @@
+@media (max-width: 780px) {
+  .content .title {
+    font-size: 1rem;
+  }
+
+  .item {
+    width: 130px;
+    height: 220px;
+    position: absolute; 
+  }
+
+  .item:nth-child(3) {
+    left: 35%;
+  }
+
+  .item:nth-child(4) {
+    left: calc(32% + 170px);
+  }
+
+  .item:nth-child(5) {
+    left: calc(28% + 340px);
+  }
+
+  .item:nth-child(6) {
+    left: calc(30% + 510px);
+    opacity: 0;
+  }
+
+  .slider .item .content .title {
+    margin-right: 40px;
+  }
+
+  .slider .item .content .description {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 550px) {
+  header {
+    padding: 5px 10px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+  }
+
+  header nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 3px;
+    flex-wrap: nowrap;
+  }
+
+  header nav .btns form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: auto;
+  }
+
+  header nav .btns form label {
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  header nav .btns form label input {
+    width: 130px;
+    height: 32px;
+    border: none;
+    text-indent: 8px;
+    font-size: 10px;
+  }
+
+  header nav .btns form label i {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  header nav .btns form button {
+    font-size: 9px;
+    padding: 5px 6px;
+    height: 30px;
+  }
+
+  header nav ul {
+    display: none;
+  }
+
+  header nav button {
+    display: block;
+    font-size: 12px;
+    padding: 4px 8px;
+    height: 32px;
+    min-width: 30px;
+  }
+
+  header button {
+    padding: 10px 5px;
+  }
+
+  .content .title {
+    font-size: 0.9rem;
+  }
+
+
+  .item {
+    width: 120px;
+    height: 200px;
+    position: absolute;
+  }
+
+  .item:nth-child(3) {
+    left: 40%;
+  }
+
+  .item:nth-child(4) {
+    left: calc(40% + 140px);
+  }
+
+  .item:nth-child(5) {
+    left: calc(50% + 280px);
+  }
+
+  .item:nth-child(6) {
+    left: calc(50% + 420px);
+    opacity: 0;
+  }
+}

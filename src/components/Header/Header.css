@@ -1,0 +1,223 @@
+@import "tailwindcss";
+
+:root{
+  --green:rgb(34, 170, 34);
+  --gray: rgb(152, 151, 151);
+  --black: #000;
+  --bg: #fff;
+}
+
+header{ 
+  padding: 32px 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: var(--bg);
+}
+
+header nav button{
+  display: none;
+}
+
+header nav .btns form label{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+header nav .btns form label input{
+  width: 452px;
+  height: 43px; 
+  text-indent: 10px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+header nav .btns form label input::placeholder{
+  text-align: start;
+}
+
+header nav .btns form label .FontAwesomeIcon{
+  width: 35px;
+  height: 19px;
+  background-color: var(--green);
+  text-align: center;
+  padding: 12px 0;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  font-size: 22px;
+}
+
+header nav .btns form button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+}
+
+header .register{
+  padding: 10px 35px;
+}
+
+header .mode{
+  font-size: 22px;
+  background-color: var(--green);
+  border-radius: 15px;
+  padding: 5px 10px;
+  margin: 0 45px 0 0;
+}
+
+@media (max-width: 780px) {
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 780px;
+    width: 100%;
+    max-height: 60px;
+    height: 100%;
+    padding: 40px 10px;
+  }
+
+  header h1{
+    font-size: 17px;
+    margin: 0 0 0 50px;
+  }
+  header h1 span{
+    font-size: 18px;
+  }
+  header nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  header nav ul {
+    display: none;
+  }
+
+  header nav button{
+    display: flex;
+    padding: 15px 15px;
+    background-color: var(--green);
+    border-radius: 15px;
+
+  }
+
+  header nav form button{
+    padding: 10px 18px;
+    font-size: 13px;
+  }
+
+  header nav .btns form button{
+      padding: 13px 20px;
+      margin: 0 auto;
+  }
+
+  
+ 
+  header nav .btns form label input {
+    width: 180px;
+    font-size: 14px;
+  }
+
+  header button{
+    font-size: 14px;
+    margin: 0 auto;
+  }
+
+  header .mode{
+    background-color: var(--green);
+    border-radius: 12px;
+    font-size: 18px;
+  }
+
+  header .item {
+    width: 110px;
+    height: 220px;
+    position: absolute;
+  }
+
+}
+
+@media (max-width: 550px) {
+  header {
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    background-color: var(--bg);
+    overflow-x: hidden;
+  }
+
+  header nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+  }
+
+  header h1 {
+    font-size: 14px;
+    margin: 0;
+  }
+
+  header h1 span {
+    font-size: 18px;
+  }
+
+
+  header nav .btns form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 3px;
+  }
+
+
+  header nav .btns form label input {
+    width: 80px;
+    height: 28px;
+    text-indent: 6px;
+    font-size: 11px;
+  }
+
+  header nav .btns form label .FontAwesomeIcon {
+    width: 14px;
+    height: 14px;
+    font-size: 14px;
+    padding: 10px;
+  }
+
+
+  header nav ul {
+    display: none;
+  }
+
+  header nav button {
+    font-size: 10px;
+    background-color: var(--green);
+    border-radius: 8px;
+  }
+
+  header .register{
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+  }
+
+  header nav .btns button {
+    width: 90px;
+    height: 40px;
+  }
+
+  header .mode {
+    font-size: 18px;
+    background-color: var(--green);
+    padding: 5px 8px;
+    border-radius: 10px;
+  }
+}

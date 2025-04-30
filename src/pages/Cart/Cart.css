@@ -1,0 +1,38 @@
+.cart_empty{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8rem 0;
+  letter-spacing: 2px;
+}
+
+.cart_empty .icon{
+  padding: 20px 0;
+}
+
+.cart_empty h2{
+  padding: 15px 0;
+}
+
+.cart_empty .cartBtn{
+  padding: 15px 10px;
+  margin: 20px 0;
+}
+
+.cartWrapper .tableContent table{
+  margin: 20px 0;
+}
+
+.cartWrapper .tableContent table tr td {
+   padding: 20px 0;
+}
+
+.cartWrapper .tableContent table tr td button {
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+}
+
+.cartWrapper .total button{
+  padding: 0.5rem 1rem;
+}

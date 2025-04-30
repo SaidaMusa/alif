@@ -6,18 +6,72 @@
   list-style-type: none;
 }
 
+:root{
+  --dark:  #333;
+  --green: rgb(4, 88, 4);
+  --beige: rgb(203, 203, 194);
+  --white: #fff;
+}
+
 .container{
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
   height: 100vh;
-  padding: 20px 65px;
-  background-color: #fff;
+  padding: 80px 55px;
+  background-color: var(--white);
   overflow-x: hidden;
+  scrollbar-width: none;
 }
 
+/* Dark mode styles */
+.dark #root {
+  background-color: var(--dark);
+  color: var(--white);
+}
 
-@media (max-width: 768px) {
+.dark .container{
+  background-color: transparent;
+  color: var(--white);
+  scrollbar-width: none;
+}
+
+.dark header {
+  background-color: var(--dark);
+}
+
+.dark button {
+  background-color: var(--green);
+  color: var(--white);
+}
+
+.dark .productCard,.typeFilter,.customCards{
+  background-color: transparent;
+}
+
+.dark  h1,h2,h4{
+  color: var(--white);
+}
+
+.dark .card-description{
+  color: var(--white);
+}
+
+.dark .chatBotInput::placeholder{
+  color: var(--white);
+}
+
+@media (max-width: 780px) {
+  .container {
+    width: 100%;
+    height: 100vh;
+    padding: 15px;
+    overflow-x: hidden;
+  }
+
+}
+
+@media (max-width: 550px) {
   .container {
     width: 100%;
     height: 100vh;

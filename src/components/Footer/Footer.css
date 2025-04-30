@@ -1,0 +1,31 @@
+@media (max-width: 768px) {
+  .footer_inner {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+    justify-content: center;
+    text-align: start;
+    padding: 30px 40px;
+  }
+
+  .media{
+    padding: 0 0 155px 0;
+  }
+
+}
+
+@media (max-width: 550px) {
+
+  .footer_inner {
+    display: grid;
+    grid-template-columns: auto;
+    align-items: center;
+    justify-content: center;
+    text-align: start;
+    padding: 30px 40px;
+  }
+
+
+}
+
+
