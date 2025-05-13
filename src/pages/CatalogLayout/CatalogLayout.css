@@ -1,0 +1,30 @@
+.catalog-layout {
+  width: 100%;
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.catalog-content {
+  flex-grow: 1;
+  width: 100%;
+}
+
+
+
+@media (max-width: 780px) {
+  
+  .catalog-layout{
+    padding-top: 50px;
+  }
+  .catalog-content {
+    width: 100%;
+  }
+}
+
+@media (max-width: 550px) {
+  .catalog-layout{
+    padding-top: 50px;
+  }
+}

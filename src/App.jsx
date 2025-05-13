@@ -1,190 +1,133 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Header from './components/Header/Header';
+import Header from "./components/Header/Header";
 import "./App.css";
-import Cart from './pages/Cart/Cart';
-import Wishlist from './pages/Wishlist/Wishlist';
-import Stats from './pages/Stats/Stats';
-import Login from './pages/Login/Login';
-import Home from './pages/Home/Home';
-import Comment from './pages/Comment/Comment'; 
-import ResponsiveMenu from './pages/ResponsiveMenu/ResponsiveMenu';
-import Footer from './components/Footer/Footer'; 
-import SearchModal from './components/SearchModal/SearchModal';
-import { allData } from './data/alldata'; 
-import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
+import Cart from "./pages/Cart/Cart";
+import Wishlist from "./pages/Wishlist/Wishlist";
+import Stats from "./pages/Stats/Stats";
+import Login from "./pages/Login/Login";
+import Home from "./pages/Home/Home";
+import Comment from "./pages/Comment/Comment";
+import Footer from "./components/Footer/Footer";
+import SearchModal from "./components/SearchModal/SearchModal";
+import CatalogLayout from "./pages/CatalogLayout/CatalogLayout";
+import ProductPage from "./components/ProductPage/ProductPage";
+import allData from "./data/alldata";
+import { logAnalyticsEvent } from "./utils/firebase";
+import { CartProvider } from "./context/CartContext";
+import { DarkModeProvider } from "./context/DarkMode";
+import { LoaderProvider, useLoader } from "./context/LoaderContext";
+import { WishlistProvider, useWishlistContext } from "./context/WishlistContext"; 
 
-function App() {
-  const [catalogOpen, setCatalogOpen] = useState(false);
-  const [wishlist, setWishlist] = useState(() => {
-    const saved = localStorage.getItem("wishlist");
-    return saved ? JSON.parse(saved) : [];
-  });
+function AppContent() {
+  const navigate = useNavigate();
+  const { loading, Loader } = useLoader(); 
+  const { wishlist, addToWishlist } = useWishlistContext(); 
 
-  const [cartItems, setCartItems] = useState(() => {
-    const savedCart = localStorage.getItem("cartItems");
-    return savedCart ? JSON.parse(savedCart) : [];
+  const [user, setUser] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem("user")) || null;
+    } catch (error) {
+      console.error("Error parsing user from localStorage:", error);
+      return null;
+    }
   });
 
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [darkMode, setDarkMode] = useState(() => {
-    const savedMode = localStorage.getItem('darkMode') === 'true';
-    return savedMode;
-  });
 
   const products = allData;
 
   useEffect(() => {
-    localStorage.setItem('darkMode', darkMode);
-    if (darkMode) {
-      document.body.classList.add('dark');
-    } else {
-      document.body.classList.remove('dark');
+    try {
+      if (!user) {
+        navigate("/login");
+        logAnalyticsEvent("user_not_logged_in", { message: "User not logged in" });
+      } else {
+        logAnalyticsEvent("user_logged_in", { email: user.email });
+      }
+    } catch (error) {
+      console.error("Error during user authentication check:", error);
     }
-
-    return () => {
-      document.body.classList.remove('dark');
-    };
-  }, [darkMode]);
+  }, [user, navigate]);
 
   useEffect(() => {
-    if (searchTerm) {
-      setFilteredProducts(
-        products.filter((product) =>
-          product.title?.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-      );
-    } else {
+    try {
+      if (searchTerm) {
+        const filtered = products.filter((product) =>
+          product.title.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setFilteredProducts(filtered);
+      } else {
+        setFilteredProducts([]);
+      }
+    } catch (error) {
+      console.error("Error while filtering products:", error);
       setFilteredProducts([]);
     }
-  }, [searchTerm]);
+  }, [searchTerm, products]);
 
-  // Wishlist functions
-  const addToWishlist = (product, isLiked) => {
-    const updated = isLiked
-      ? [...wishlist, product]
-      : wishlist.filter((item) => item.id !== product.id);
-    setWishlist(updated);
-    localStorage.setItem("wishlist", JSON.stringify(updated));
-  };
-
-  // Cart functions
-  const addToCart = (newProduct) => {
-    setCartItems((prevCartItems) => {
-      const existingItem = prevCartItems.find((item) => item.id === newProduct.id);
-
-      if (existingItem) {
-        return prevCartItems.map((item) =>
-          item.id === newProduct.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      } else {
-        return [...prevCartItems, { ...newProduct, quantity: 1 }];
-      }
-    });
-  };
-
-  const handleRemoveFromCart = (id) => {
-    const updatedCart = cartItems.filter((item) => item.id !== id);
-    setCartItems(updatedCart);
-    localStorage.setItem("cartItems", JSON.stringify(updatedCart));
-    resetTypeFilter(); // Reset the type filter when removing an item
-  };
-
-  const updateQuantity = (id, newQty) => {
-    const updated = cartItems.map((item) =>
-      item.id === id ? { ...item, quantity: newQty } : item
-    );
-    setCartItems(updated);
-    localStorage.setItem("cartItems", JSON.stringify(updated));
-  };
-
-  const handleOrder = () => {
-    alert("Thank you for your order!");
-    setCartItems([]);
-    localStorage.removeItem("cartItems");
-  };
-
-  const resetTypeFilter = () => {
-    // Reset the type filter here to the default state
-    setFilteredProducts([]);  // Clears the filtered products
-  };
-
- 
-
-  return (
+  return loading ? (
+    <Loader />
+  ) : (
     <>
       <div className="container">
-        <Header
-          wishlistCount={wishlist.length}
-          cartCount={cartItems.length}
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          alldata={products}
-          products={products}
-          setFilteredProducts={setFilteredProducts}
-          toggleDarkMode={() => setDarkMode(!darkMode)}
-          filteredProducts={filteredProducts}
-          setCatalogOpen={setCatalogOpen}
-        />
+        {user && (
+          <Header
+            wishlistCount={wishlist.length} 
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            setFilteredProducts={setFilteredProducts}
+          />
+        )}
 
         <SearchModal
           isOpen={!!searchTerm}
-          onClose={() => setSearchTerm('')}
+          onClose={() => setSearchTerm("")}
           filtered={filteredProducts}
-          searchTerm={searchTerm}
-          addToWishlist={addToWishlist}
-          wishlist={wishlist}
-          addToCart={addToCart}
         />
 
-        <ErrorBoundary>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Home
-                  addToWishlist={addToWishlist}
-                  wishlist={wishlist}
-                  addToCart={addToCart}
-                  searchTerm={searchTerm}
-                  filteredProducts={filteredProducts}
-                  catalogOpen={catalogOpen}
-                />
-              }
-            />
-            <Route
-              path="/cart"
-              element={
-                <Cart
-                  cartItems={cartItems}
-                  onRemove={handleRemoveFromCart}
-                  updateQuantity={updateQuantity}
-                  onOrder={handleOrder}
-                  resetTypeFilter={resetTypeFilter} 
-                />
-              }
-            />
-            <Route
-              path="/wishlist"
-              element={
-                <Wishlist
-                  wishlist={wishlist}
-                  addToWishlist={addToWishlist}
-                />
-              }
-            />
-            <Route path="/stats" element={<Stats />} />
-            <Route path="/comment" element={<Comment />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/res" element={<ResponsiveMenu />} />
-          </Routes>
-        </ErrorBoundary>
+        <Routes>
+          {user ? (
+            <>
+              <Route
+                path="/"
+                element={<Home addToWishlist={addToWishlist} wishlist={wishlist} />} 
+              />
+              <Route path="/cart" element={<Cart />} />
+              <Route
+                path="/wishlist"
+                element={<Wishlist wishlist={wishlist} addToWishlist={addToWishlist} />} 
+              />
+              <Route path="/stats" element={<Stats />} />
+              <Route path="/comment" element={<Comment />} />
+              <Route path="/catalog" element={<CatalogLayout />} />
+              <Route path="/product/:id" element={<ProductPage />} />
+            </>
+          ) : (
+            <>
+              <Route path="/login" element={<Login setUser={setUser} />} />
+              <Route path="*" element={<Login setUser={setUser} />} />
+            </>
+          )}
+        </Routes>
       </div>
-      <Footer />
+      {user && <Footer />}
     </>
+  );
+}
+
+function App() {
+  return (
+    <DarkModeProvider>
+      <CartProvider>
+        <WishlistProvider>
+          <LoaderProvider duration={2000}>
+            <AppContent />
+          </LoaderProvider>
+        </WishlistProvider>
+      </CartProvider>
+    </DarkModeProvider>
   );
 }
 

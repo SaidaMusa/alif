@@ -4,7 +4,7 @@
   --green:rgb(34, 170, 34);
   --gray: rgb(152, 151, 151);
   --black: #000;
-  --bg: #fff;
+  --bgColor: #fff;
 }
 
 header{ 
@@ -13,12 +13,13 @@ header{
   top: 0;
   left: 0;
   z-index: 1000;
-  background-color: var(--bg);
+  background-color: var(--bgColor);
 }
 
-header nav button{
+ header nav button{
   display: none;
-}
+ }
+
 
 header nav .btns form label{
   display: flex;
@@ -26,27 +27,25 @@ header nav .btns form label{
   justify-content: center;
 }
 header nav .btns form label input{
-  width: 452px;
-  height: 43px; 
+  display: flex;
+  flex-basis: 1000px; 
+  flex-grow: 1;     
+  max-width: 1200px;  
+  min-width: 400px;   
+  padding: 0.5rem;
   text-indent: 10px;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
-}
-
-header nav .btns form label input::placeholder{
+  outline: none;
   text-align: start;
 }
 
-header nav .btns form label .FontAwesomeIcon{
-  width: 35px;
-  height: 19px;
-  background-color: var(--green);
-  text-align: center;
-  padding: 12px 0;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-  font-size: 22px;
+header nav .btns form label .icon{
+  padding: 8px;
+  border-bottom-right-radius: 7px;
+  border-top-right-radius: 8px;
 }
+
 
 header nav .btns form button{
   display: flex;
@@ -55,16 +54,22 @@ header nav .btns form button{
   padding: 10px 15px;
 }
 
-header .register{
-  padding: 10px 35px;
-}
 
-header .mode{
-  font-size: 22px;
+header button{
+  font-size: 16px;
   background-color: var(--green);
   border-radius: 15px;
-  padding: 5px 10px;
-  margin: 0 45px 0 0;
+  padding: 7px 10px;
+}
+
+ ul{
+  padding: 30px 0;
+  margin: 0 20px;
+}
+
+ul li a:hover,
+ul li label select:hover{
+  color: var(--green);
 }
 
 @media (max-width: 780px) {
@@ -75,68 +80,40 @@ header {
     justify-content: center;
     max-width: 780px;
     width: 100%;
-    max-height: 60px;
+    max-height: 40px;
     height: 100%;
-    padding: 40px 10px;
+    padding: 30px 0;
   }
 
-  header h1{
-    font-size: 17px;
-    margin: 0 0 0 50px;
-  }
-  header h1 span{
-    font-size: 18px;
-  }
-  header nav {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
 
   header nav ul {
     display: none;
   }
 
+ 
+
+  header h1 {
+    display: block;              
+    font-size: 16px;             
+    white-space: nowrap;       
+  }
+
+  header h1 span{
+    font-size: 20px;
+  }
+
   header nav button{
     display: flex;
-    padding: 15px 15px;
+    padding: 8px 10px;
     background-color: var(--green);
     border-radius: 15px;
-
   }
 
-  header nav form button{
-    padding: 10px 18px;
-    font-size: 13px;
-  }
-
-  header nav .btns form button{
-      padding: 13px 20px;
-      margin: 0 auto;
-  }
-
-  
- 
   header nav .btns form label input {
-    width: 180px;
-    font-size: 14px;
-  }
-
-  header button{
-    font-size: 14px;
-    margin: 0 auto;
-  }
-
-  header .mode{
-    background-color: var(--green);
-    border-radius: 12px;
-    font-size: 18px;
-  }
-
-  header .item {
-    width: 110px;
-    height: 220px;
-    position: absolute;
+  flex-grow: 1;        
+  min-width: 280px;   
+  max-width: 950px;  
+  padding: 0.5rem;
   }
 
 }
@@ -159,8 +136,9 @@ header {
   }
 
   header h1 {
-    font-size: 14px;
-    margin: 0;
+    display: block;              
+    font-size: 16px;             
+    white-space: nowrap;       
   }
 
   header h1 span {
@@ -177,26 +155,17 @@ header {
 
 
   header nav .btns form label input {
-    width: 80px;
-    height: 28px;
     text-indent: 6px;
-    font-size: 11px;
+    font-size: 12px;
   }
 
-  header nav .btns form label .FontAwesomeIcon {
-    width: 14px;
-    height: 14px;
-    font-size: 14px;
-    padding: 10px;
-  }
-
+ 
 
   header nav ul {
     display: none;
   }
 
   header nav button {
-    font-size: 10px;
     background-color: var(--green);
     border-radius: 8px;
   }
@@ -209,15 +178,11 @@ header {
     font-size: 12px;
   }
 
-  header nav .btns button {
-    width: 90px;
-    height: 40px;
-  }
 
   header .mode {
     font-size: 18px;
     background-color: var(--green);
-    padding: 5px 8px;
+    padding: 5px 10px;
     border-radius: 10px;
   }
 }

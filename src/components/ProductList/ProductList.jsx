@@ -1,24 +1,14 @@
-import React from 'react';
-import alldata from '../../data/alldata';
-import ProductCard from '../ProductCard/ProductCard';
+import React from "react";
+import ProductCard from "../ProductCard/ProductCard";
+import "../ProductList/ProductList.css";
 
-const ProductList = ({ category, addToWishlist, wishlist, addToCart }) => {
-  const filteredProducts = alldata.filter((product) => product.type === category);
-
+const ProductList = ({ products = [] }) => {
   return (
-    <div className="flex flex-wrap justify-center gap-6">
-      {filteredProducts.length > 0 ? (
-        filteredProducts.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            addToWishlist={addToWishlist}
-            wishlist={wishlist}
-            addToCart={addToCart}
-          />
-        ))
+    <div className="product-list flex-grow">
+      {products.length > 0 ? (
+        products.map((product) => <ProductCard key={product.id} product={product} />)
       ) : (
-        <p className="text-center text-gray-500 mt-6">No products found in this category.</p>
+        <p className="text-center text-gray-500 col-span-full">No products found.</p>
       )}
     </div>
   );

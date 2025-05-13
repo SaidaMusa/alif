@@ -1,33 +1,45 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import "animate.css";
+
+const menuItems = [
+  { path: "/", label: "Home" },
+  { path: "/cart", label: "Cart" },
+  { path: "/wishlist", label: "Wishlist" },
+  { path: "/stats", label: "Statistics" },
+  { path: "/comment", label: "Comment" },
+];
 
 const ResponsiveMenu = ({ open }) => {
+  const { pathname } = useLocation();
+
+  if (!open) return null;
+
   return (
-    <>
-      {open && (
-        <div className="absolute top-16 right-0 w-[70%] max-w-xs bg-green-500 text-white z-20 rounded-3xl shadow-lg animate__animated animate__fadeInDown">
-          <div className="text-xl font-semibold uppercase py-10 px-6">
-            <ul className="flex flex-col items-center gap-6">
-              <li>
-                <Link to="/" className="hover:text-green-200 transition-colors duration-200">Home</Link>
-              </li>
-              <li>
-                <Link to="/cart" className="hover:text-green-200 transition-colors duration-200">Cart</Link>
-              </li>
-              <li>
-                <Link to="/wishlist" className="hover:text-green-200 transition-colors duration-200">Wishlist</Link>
-              </li>
-              <li>
-                <Link to="/stats" className="hover:text-green-200 transition-colors duration-200">Statistics</Link>
-              </li>
-              <li>
-                <Link to="/comment" className="hover:text-green-200 transition-colors duration-200">Comment</Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      )}
-    </>
+    <div 
+      role="menu" 
+      aria-label="Responsive Navigation Menu"
+      className="absolute top-16 right-0 w-[70%] max-w-xs bg-green-500 text-white z-20 rounded-3xl shadow-lg p-6 animate__animated animate__fadeInDown"
+    >
+      <ul className="flex flex-col items-center gap-6">
+        {menuItems.map(({ path, label }) => {
+          const isActive = pathname === path;
+          return (
+            <li key={path}>
+              <Link 
+                to={path}
+                aria-current={isActive ? "page" : undefined}
+                className={`transition duration-200 ${
+                  isActive ? "text-green-300 font-semibold" : "hover:text-green-200"
+                }`}
+              >
+                {label}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 };
 

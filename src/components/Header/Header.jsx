@@ -1,172 +1,194 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { 
-  faShoppingCart, faMagnifyingGlass, faHeart, faChartSimple, 
-  faComment, faBars, faMoon, faSun, faSignIn 
-} from "@fortawesome/free-solid-svg-icons";
+import {
+  AiOutlineShoppingCart,
+  AiOutlineSearch,
+  AiOutlineHeart,
+  AiOutlineBarChart,
+  AiOutlineComment,
+  AiOutlineBars,
+  AiOutlineUser,
+  AiOutlineLogout,
+} from "react-icons/ai";
+import { BsMoon, BsSun } from "react-icons/bs";
 import "animate.css/animate.min.css";
-import "../Header/Header.css"
+import "../Header/Header.css";
 import ResponsiveMenu from "../../pages/ResponsiveMenu/ResponsiveMenu";
-import SearchModal from "../../components/SearchModal/SearchModal";
 import Sidebar from "../SideBar/Sidebar";
-import { allData } from "../../data/alldata";
+import allData from "../../data/alldata";
+import { useDarkMode } from "../../hooks/useDarkMode";
+import { useCart } from "../../context/CartContext";
 
-const Header = ({ wishlistCount, cartCount, searchTerm, setSearchTerm, setFilteredProducts }) => {
-  const [open, setOpen] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+const Header = ({
+  wishlistCount,
+  searchTerm,
+  setSearchTerm,
+  setFilteredProducts,
+  onLogout,
+}) => {
+  const [menuState, setMenuState] = useState({
+  open: false,
+  sidebarOpen: false,
+  openProfile: false,
+});
 
-  useEffect(() => {
-    const savedMode = localStorage.getItem("darkMode") === "true";
-    setDarkMode(savedMode);
-    document.body.classList.toggle("dark", savedMode);
-  }, []);
+const {cartCount,cartItems} = useCart();
+const toggleMenuState = (key) => {
+  setMenuState((prev) => ({ ...prev, [key]: !prev[key] }));
+};
 
-  const toggleDarkMode = useCallback(() => {
-    setDarkMode(prevMode => {
-      const newMode = !prevMode;
-      localStorage.setItem("darkMode", newMode);
-      document.body.classList.toggle("dark", newMode);
-      return newMode;
-    });
-  }, []);
-
-  const handleSearchChange = useCallback((e) => {
-    const value = e.target.value;
-    setSearchTerm(value);
-    filterProducts(value);
-  }, [setSearchTerm, setFilteredProducts]);
+  const { darkMode, toggleDarkMode } = useDarkMode();
+  const handleSearchChange = useCallback(
+    (e) => {
+      const value = e.target.value;
+      setSearchTerm(value);
+      filterProducts(value);
+    },
+    [setSearchTerm, setFilteredProducts]
+  );
 
   const filterProducts = (term) => {
-    const filtered = allData.filter(product =>
+    const filtered = allData.filter((product) =>
       product.title.toLowerCase().includes(term.toLowerCase())
     );
     setFilteredProducts(filtered);
   };
 
-  const handleCategorySelect = useCallback((category) => {
-    const filtered = allData.filter(item => item.type === category);
-    setFilteredProducts(filtered);
-    setSidebarOpen(false);
-  }, [setFilteredProducts]);
+ const handleProfileClick = () => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      localStorage.removeItem("user");
+      if (onLogout) onLogout();
+    }
+    window.location.href = "/login";
+  };
+
+
+
 
   const categories = [
     "Smartphones and gadgets", "Laptops, Computers", "Televisions", "Audio Equipment",
     "Kitchen appliances", "Home Appliances", "Beauty and Health", "Smart Home",
     "Gaming Equipment", "Sports Goods", "Automotive Products", "Automotive Goods",
-    "Tools and Garden Equipment", "Children's Products", "Construction and Repair"
+    "Tools and Garden Equipment", "Children's Products", "Construction and Repair",
   ];
 
   return (
     <>
-      <header className="flex items-center justify-center gap-[10px] w-full h-[45px] animate__animated animate__zoomIn">
-        <nav className="flex items-center justify-around gap-[28px]">
-          <Link to="/">
-            <h1 className="text-xl font-serif text-base/7 font-bold tracking-wider">
+      <header className="flex items-center justify-center gap-[15px] w-full h-[45px] animate__animated animate__zoomIn">
+        <nav className="flex items-center justify-around gap-[25px]">
+          <Link to="/" aria-label="Home - AlifShop">
+            <h1 className="text-xl font-serif text-base/7 font-bold ">
               <span className="text-green-700 text-2xl">Alif</span>Shop
             </h1>
           </Link>
 
-          <div className="btns flex items-center justify-center gap-[5px]">
-            <form 
-              className="flex items-center justify-center gap-[5px]" 
-              onSubmit={(e) => e.preventDefault()}
-            >
-              <button
-                type="button"
-                onClick={() => setSidebarOpen(true)}
-                className="bg-green-600 hover:bg-green-500 rounded-[8px] gap-1 focus:outline-2 focus:outline-offset-2 focus:outline-green-700"
-              >
-                <FontAwesomeIcon icon={faBars} /> Products <span>catalog</span>
-              </button>
+          <div className="btns flex items-center justify-center gap-[10px]">
+            <form className="flex items-center gap-[5px]" onSubmit={(e) => e.preventDefault()}>
+              <Link to="/catalog" aria-label="Open Catalogs">
+                <button
+                  type="button"
+                  className="bg-green-600 hover:bg-green-500 rounded-[8px] gap-2 focus:outline-2 focus:outline-offset-2 focus:outline-green-700"
+                  aria-label="Open Catalogs"
+                >
+                  <AiOutlineBars size={24} /> Catalogs
+                </button>
+              </Link>
 
-              <label>
-              <input
-                 type="text"
-                 className="placeholder:text-gray-500 border-2 outline-none border-green-600 placeholder:italic"
-                 placeholder="Search for products..."
-                 value={searchTerm}
-                 onChange={handleSearchChange}
-                 id="text"    
-                 name="text"
-                 autoComplete="text"
-               />
-                <FontAwesomeIcon className="FontAwesomeIcon" icon={faMagnifyingGlass} />
+              <label className="flex items-center gap-5">
+                <div className="relative flex items-center">
+                  <input
+                    type="text"
+                    className="border border-green-600 rounded-lg pl-4 pr-10 py-1 placeholder:text-gray-500"
+                    placeholder="Search for products..."
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                    aria-label="Search products"
+                  />
+                  <span className="icon absolute right-0 top-1/2 transform -translate-y-1/2 bg-green-600 text-white p-2">
+                    <AiOutlineSearch size={25} />
+                  </span>
+                </div>
               </label>
             </form>
           </div>
 
-          <ul className="flex items-center justify-between gap-[55px] relative">
-            <li>
-              <Link className="hover:text-green-600 text-xl" to="/cart">
-                <FontAwesomeIcon icon={faShoppingCart} />
-                {cartCount > 0 && (
-                  <span className="absolute top-0 right-0 bg-green-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                    {cartCount}
-                  </span>
-                )}
+          <ul className="flex items-center justify-between gap-[40px] relative">
+            <li className="relative flex items-center">
+              <Link to="/cart" className="text-xl hover:text-green-600">
+                <AiOutlineShoppingCart size={28} />
               </Link>
+              {cartCount>0 && (
+                <span className="absolute -top-3 -right-3 bg-green-500 text-white text-xs w-6 h-6 flex items-center justify-center rounded-full font-bold">
+                  {cartCount}
+                </span>
+              )}
             </li>
 
-            <li className="relative">
-              <Link className="hover:text-cyan-600 text-xl" to="/wishlist">
-                <FontAwesomeIcon icon={faHeart} />
-                {wishlistCount > 0 && (
-                  <span className="absolute -top-2 -right-3 bg-green-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                    {wishlistCount}
-                  </span>
-                )}
+            <li className="relative flex items-center">
+              <Link to="/wishlist" className="text-xl hover:text-green-600">
+                <AiOutlineHeart size={28} />
               </Link>
-            </li>
-
-            <li>
-              <Link className="hover:text-cyan-600 text-xl" to="/stats">
-                <FontAwesomeIcon icon={faChartSimple} />
-              </Link>
+              {wishlistCount > 0 && (
+                <span className="absolute -top-3 -right-3 bg-green-500 text-white text-xs w-6 h-6 flex items-center justify-center rounded-full font-bold">
+                  {wishlistCount}
+                </span>
+              )}
             </li>
 
             <li>
-              <Link className="hover:text-cyan-600 text-xl" to="/comment">
-                <FontAwesomeIcon icon={faComment} />
+              <Link to="/stats" className="hover:text-cyan-600">
+                <AiOutlineBarChart size={24} />
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/comment" className="hover:text-cyan-600">
+                <AiOutlineComment size={25} />
               </Link>
             </li>
           </ul>
 
-          <button onClick={() => setOpen(!open)}>
-            <FontAwesomeIcon icon={faBars} />
+          <button  onClick={() => toggleMenuState("open")}  aria-label={menuState.open ? "Close Menu" : "Open Menu"}>
+            <AiOutlineBars size={24} />
           </button>
         </nav>
 
-        <button
-          className="bg-green-600 hover:bg-green-500 rounded-[8px] focus:outline-2 focus:outline-offset-2 focus:outline-cyan-400 register flex items-center"
-          type="button"
-        >
-          <Link to="/login" className="flex items-center gap-2">
-            <FontAwesomeIcon icon={faSignIn} />
-            <span>Login</span>
-          </Link>
-        </button>
+     <div className="relative">
+            <button
+              onClick={() => toggleMenuState("openProfile")}
+              aria-label={menuState.openProfile ? "Close Profile" : "Open Profile"}
+            >
+              <AiOutlineUser size={24} />
+            </button>
+            {menuState.openProfile && (
+              <div className="absolute flex flex-col items-center justify-center gap-3 right-0 mt-2 w-58 h-24  bg-neutral-800 text-center rounded-[10px] shadow-lg py-2 z-50">
+                <p className="px-4 py-2 text-white text-xl">
+                  {JSON.parse(localStorage.getItem("user"))?.firstName || "User"}{" "}
+                  {JSON.parse(localStorage.getItem("user"))?.lastName || ""}
+                </p>
+                <button
+                  className="flex items-center justify-center gap-1 text-xl w-[80%] text-center px-4 py-2 text-neutral-800 hover:bg-gray-200"
+                  onClick={handleProfileClick}
+                >
+                <span> <AiOutlineLogout size={20}/> </span>Logout
+                </button>
+              </div>
+            )}
+          </div>
 
-        <button onClick={toggleDarkMode} className="mode ml-4">
-          <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
-        </button>
 
-        <ResponsiveMenu open={open} />
+         <button onClick={toggleDarkMode} aria-label={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}>
+            {darkMode ? <BsSun size={24} /> : <BsMoon size={24} />}
+          </button>
 
-        <SearchModal
-          isOpen={modalOpen}
-          onClose={() => setModalOpen(false)}
-          searchTerm={searchTerm}
-        />
+        <ResponsiveMenu open={menuState.open} />
       </header>
 
-      {sidebarOpen && (
+     {menuState.sidebarOpen && (
         <Sidebar
           categories={categories}
-          onSelectCategory={handleCategorySelect}
-          onClose={() => setSidebarOpen(false)}
+          onClose={() => toggleMenuState("sidebarOpen")}
         />
       )}
     </>

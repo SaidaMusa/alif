@@ -1,0 +1,10 @@
+.productCard{
+  padding: 20px 20px;
+}
+
+.productCard img{
+  padding: 5px 0;
+}
+.productCard .addToCart{
+  padding: 15px 20px;
+}

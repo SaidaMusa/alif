@@ -1,20 +1,31 @@
-/* Basic styling for the form background */
+:root{
+  --black: rgba(19, 35, 47, 0.9);
+  --white: #fff;
+  --bg: #333;
+  --btn:#0c9352;
+  --hover:#168d5b;
+  --gray:#a0b3b0;
+}
+
 .form {
-  background: rgba(19, 35, 47, 0.9); /* Dark background for better contrast */
-  padding: 40px;
+  background: var(--bg); 
+  padding: 80px;
   max-width: 600px;
   margin: 40px auto;
   border-radius: 4px;
-  box-shadow: 0 4px 10px rgba(19, 35, 47, 0.3);
-  color: #fff; /* Text color white */
+  box-shadow: 0 4px 10px var(--black);
+  
 }
 
-/* Tabs styling */
+.form .tab{
+  padding: 15px 40px;
+}
 .tab-group {
   list-style: none;
   padding: 0;
   margin: 0 0 40px 0;
   display: flex;
+  background-color: var(--black);
 }
 
 .tab-group li {
@@ -25,8 +36,8 @@
 .tab-group li a {
   display: block;
   padding: 15px;
-  background: rgba(160, 179, 176, 0.25);
-  color: #a0b3b0;
+  background-color: var(--black);
+  color: var(--gray);
   font-size: 20px;
   text-decoration: none;
   cursor: pointer;
@@ -34,16 +45,12 @@
 }
 
 .tab-group li a:hover {
-  background: #168d5b;
-  color: #fff;
+  background: var(--hover);
+  color: var(--white);
 }
 
-.tab-group .active a {
-  background: #1ab188;
-  color: #fff;
-}
 
-/* Form input fields */
+
 .field-wrap {
   position: relative;
   margin-bottom: 20px;
@@ -51,7 +58,7 @@
 
 .field-wrap label {
   transform: translateY(6px);
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--gray);
   font-size: 16px;
   pointer-events: none;
   transition: 0.25s ease;
@@ -61,55 +68,28 @@
   width: 100%;
   padding: 10px;
   font-size: 18px;
-  background: #333;
-  border: 1px solid #ddd;
-  color: #fff;
+  background-color: transparent;
+  border: 1px solid var(--white);
+  color: var(--white);
   border-radius: 4px;
   transition: border-color 0.25s ease;
 }
 
-.field-wrap input:focus {
-  outline: none;
-  border-color: #1ab188;
-}
 
-/* Submit buttons */
 .button {
   width: 100%;
   padding: 15px;
   font-size: 1.2rem;
-  background: #1ab188;
-  color: #fff;
+  background-color: var(--btn);
+  color: var(--white);
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
   cursor: pointer;
   transition: 0.3s;
 }
 
 .button:hover {
-  background: #168d5b;
+  background: var(--hover);
 }
 
-/* Forgot password text */
-.forgot {
-  text-align: right;
-  margin-top: -15px;
-}
-
-.forgot a {
-  color: #1ab188;
-  text-decoration: none;
-}
-
-.forgot a:hover {
-  color: #168d5b;
-}
-
-/* General styling adjustments */
-#login h1,#signup h1{
-  text-align: center;
-  color: #fff;
-  margin-bottom: 20px;
-  font-size: 22px;
-}
 

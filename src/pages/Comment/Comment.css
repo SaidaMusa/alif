@@ -5,15 +5,17 @@
    --green: rgb(35, 138, 64);
    --white : #fff;
    --grey : #555;
+   --colorText: #333;
 }
 
-.accordion {
+
+.commentSection .accordion {
   background: var(--green);
   width: 1200px;
   border-radius: 10px;
   box-shadow: 5px 5px 15px var(--black);
   overflow: hidden;
-  margin: 30px 65px;
+  margin: 40px 0;
 }
 
 .accordion__item {
@@ -57,7 +59,7 @@
 .accordion__content p {
   margin: 15px 0;
   font-size: 16px;
-  color: var(--grey);
+  color: var(--colorText);
 }
 
 .is-expanded .accordion__content {
@@ -69,39 +71,58 @@
   transform: rotate(180deg);
 }
 
-/* Media Queries for responsiveness */
+
+
 
 @media (max-width: 780px) {
-  .accordion {
-    width: 90%; /* Make accordion container take up 90% of the screen width */
-    margin: 30px auto; /* Center the accordion horizontally */
+  .commentSection{
+  padding-top: 60px;
+}
+
+ .commentSection h1{
+  font-size: 26px;
+  margin: 20px 0;
+  color: var(--colorText);
+}
+ 
+ .commentSection .accordion {
+    width: 85%; 
+    margin: 30px auto; 
   }
 
   .accordion__title {
-    font-size: 16px; /* Slightly smaller font for better readability on smaller screens */
-    padding: 15px 18px; /* Reduce padding for mobile */
+    font-size: 16px; 
+    padding: 15px 18px; 
   }
 
   .accordion__content p {
-    font-size: 14px; /* Adjust text size for mobile */
+    font-size: 14px;
+  }
+
+  .chatWrap{
+    background-color: transparent
   }
 }
 
 @media (max-width: 550px) {
   .accordion {
-    width: 95%; /* Make accordion container even smaller on very small screens */
+    width: 95%;
   }
 
   .accordion__title {
-    font-size: 14px; /* Reduce font size more for very small screens */
-    padding: 12px 15px; /* Further reduce padding */
+    font-size: 14px; 
+    padding: 12px 15px; 
   }
 
   .accordion__content p {
-    font-size: 13px; /* Adjust text size to fit small screens */
+    font-size: 13px; 
   }
 
   .accordion__content {
-    padding: 10px 15px; /* Reduce padding to save space */
+    padding: 10px 15px; 
+  }
+
+   .chatWrap{
+    background-color: transparent
   }
 }

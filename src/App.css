@@ -1,82 +1,149 @@
-*{
+@import "tailwindcss";
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  text-decoration: none;
   list-style-type: none;
+  text-decoration: none;
 }
 
-:root{
-  --dark:  #333;
-  --green: rgb(4, 88, 4);
-  --beige: rgb(203, 203, 194);
-  --white: #fff;
+:root {
+  --color-dark: #333;
+  --color-green: #045804;
+  --color-grass: rgb(33, 173, 33);
+  --color-beige: #CBCBC2;
+  --color-white: #FFF;
+  --transition-default: 0.3s ease;
 }
 
-.container{
+*,*::before,*::after{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
+
+
+
+body {
+  background-color: var(--color-white);
+  color: var(--color-dark);
+  transition: background-color var(--transition-default), color var(--transition-default);
+}
+
+.container {
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
-  height: 100vh;
   padding: 80px 55px;
-  background-color: var(--white);
+  height: 100vh;
   overflow-x: hidden;
   scrollbar-width: none;
 }
 
-/* Dark mode styles */
-.dark #root {
-  background-color: var(--dark);
-  color: var(--white);
+.container button{
+  cursor: pointer;
 }
 
-.dark .container{
-  background-color: transparent;
-  color: var(--white);
-  scrollbar-width: none;
-}
-
-.dark header {
-  background-color: var(--dark);
-}
-
-.dark button {
-  background-color: var(--green);
-  color: var(--white);
-}
-
-.dark .productCard,.typeFilter,.customCards{
-  background-color: transparent;
-}
-
-.dark  h1,h2,h4{
-  color: var(--white);
-}
-
-.dark .card-description{
-  color: var(--white);
-}
-
-.dark .chatBotInput::placeholder{
-  color: var(--white);
-}
 
 @media (max-width: 780px) {
   .container {
-    width: 100%;
-    height: 100vh;
     padding: 15px;
-    overflow-x: hidden;
   }
-
 }
 
 @media (max-width: 550px) {
   .container {
-    width: 100%;
-    height: 100vh;
-    padding: 15px;
-    overflow-x: hidden;
+    padding: 10px;
   }
+}
 
+/*Dark Mode Styles */
+
+.dark {
+  background-color: var(--color-dark);
+  color: var(--color-white);
+}
+
+.dark .container {
+  background-color: transparent;
+}
+
+.dark header{
+  background-color: var(--color-dark);
+}
+
+.dark header .darkLightBtn{
+  background-color: transparent;
+  color: var(--color-white);
+}
+
+.dark .productCard,
+.dark .card-description,
+.dark .chatBotInput::placeholder,
+.dark h1,
+.dark h2,
+.dark p,
+.dark .cartWrapper tbody .midNum{
+  color: var(--color-white);
+  background-color: transparent;
+}
+
+.dark .productCard .heartBtn{
+  padding: 5px 8px;
+  
+}
+
+.dark button {
+  background-color: var(--color-green);
+  color: var(--color-white);
+  transition: background-color var(--transition-default), color var(--transition-default);
+}
+
+.dark .productCard {
+  background-color: transparent;
+}
+
+.dark .sidebar{
+  background-color: transparent;
+}
+
+.dark .sidebar h1{
+  color: var(--color-grass);
+}
+
+.dark .sidebar li:hover{
+  background-color: var(--color-green);
+}
+
+.dark .modal-overlay .modal-content{
+  background-color: var(--color-dark);
+  padding: 20px;
+}
+
+.dark .modal-overlay .modal-content button{
+  padding: 6px;
+  border-radius: 16px;
+}
+
+
+.dark .cards{
+  background-color: transparent;
+}
+
+.dark .statistics h1,
+.dark .statistics p{
+  color: var(--color-dark);
+}
+
+.dark .chatbot strong{
+  color: var(--color-dark);
+}
+
+.dark .productPage .descriptionPart p,
+.dark .productPage h2{
+  color: var(--color-dark);
+}
+
+.dark .commentSection h1{
+  color: var(--color-white);
 }

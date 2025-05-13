@@ -7,6 +7,8 @@ export default function Chatbot() {
   const [input, setInput] = useState('');
 
   const handleSend = async () => {
+    if (!input.trim()) return;
+
     const userMessage = { sender: 'user', text: input };
     setMessages([...messages, userMessage]);
     setInput('');
@@ -20,10 +22,10 @@ export default function Chatbot() {
         },
         {
           headers: {
-            'Authorization': `Bearer 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`,
+            'Authorization': 'Bearer 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',
             'Content-Type': 'application/json',
-            'HTTP-Referer': 'http://localhost:5173', 
-            'X-Title': 'My Chatbot'
+            'HTTP-Referer': window.location.origin,
+            'X-Title': 'My Chatbot',
           },
         }
       );
@@ -36,21 +38,34 @@ export default function Chatbot() {
       setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
       console.error('Xatolik:', error);
+      setMessages((prev) => [
+        ...prev,
+        { sender: 'bot', text: '❌ Javobni olishda xatolik yuz berdi.' },
+      ]);
     }
   };
 
   return (
-    <div style={{ width: '100%', maxWidth: 1220, margin: '0 auto' }}>
-      <div style={{ height: 300, overflowY: 'auto', border: '1px solid #ccc', padding: 10,borderRadius: '18px' }}>
+    <div className='chatbot' style={{ width: '100%', maxWidth: 1220, margin: '0 auto'}}>
+      <div
+        style={{
+          height: 300,
+          overflowY: 'auto',
+          border: '1px solid #ccc',
+          backgroundColor:'white',
+          padding: 10,
+          borderRadius: '18px',
+        }}
+      >
         {messages.map((msg, i) => (
           <motion.div
             key={i}
             style={{ textAlign: msg.sender === 'user' ? 'right' : 'left' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.4 }}
           >
-            <strong>{msg.sender}:</strong> {msg.text}
+            <strong>{msg.sender}: {msg.text}</strong> 
           </motion.div>
         ))}
       </div>
@@ -58,10 +73,24 @@ export default function Chatbot() {
         value={input}
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-        className='chatBotInput'
         placeholder="Message..."
-        style={{ width: '100%', padding: 25, marginTop: 10,marginBottom: 30,outline: 'none',border: '1px solid #ccc',borderRadius: '18px',boxShadow : '0 0 7px #ccc' }}
+         aria-label="Message input"
+         aria-describedby="inputDescription"
+        style={{
+          width: '100%',
+          padding: 25,
+          marginTop: 10,
+          marginBottom: 30,
+          outline: 'none',
+          backgroundColor:'white',
+          color:'black',
+          border: '1px solid #ccc',
+          borderRadius: '18px',
+          boxShadow: '0 0 7px #ccc',
+        }}
       />
     </div>
   );
 }
+
+
