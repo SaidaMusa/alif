@@ -16,6 +16,10 @@ header{
   background-color: var(--bgColor);
 }
 
+.logoutBtn{
+  margin: 0 1.5rem;
+}
+
  header nav button{
   display: none;
  }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { useCart } from "../../context/CartContext";
-
+import "../ProductPage/ProductPage.css"
 const ProductPage = () => {
   const location = useLocation();
   const { product } = location.state || {};
@@ -37,7 +37,7 @@ const ProductPage = () => {
   const isInCart = !!cartItem;
 
   return (
-    <div className="productPage flex flex-col lg:flex-row items-center justify-center min-h-screen bg-gray-100 p-8">
+    <div className="productPage flex flex-col lg:flex-row gap-3 items-center justify-center min-h-screen bg-gray-100 p-8">
       <div className="flex-1 flex justify-center items-center">
         <img
           src={product.image || product.images?.[0]}
@@ -48,7 +48,7 @@ const ProductPage = () => {
 
       <div
         style={{ marginRight: "4rem", padding: "2rem" }}
-        className="flex-1 flex flex-col items-center gap-5 p-6 bg-white rounded-lg shadow-lg"
+        className="descriptionWrapper flex-1 flex flex-col items-center gap-5 p-6 bg-white rounded-lg shadow-lg"
       >
         <h2 className="text-3xl font-bold mb-4">{product.title}</h2>
 
@@ -63,8 +63,8 @@ const ProductPage = () => {
             </button>
           ))}
         </div>
-
-        <div className="descriptionPart flex flex-col items-center gap-4">
+        
+        <div className="flex flex-col items-center gap-4">
           <p className="text-2xl text-green-700 mb-2">${product.price}</p>
           <p className="text-lg mb-4">{product.description}</p>
 

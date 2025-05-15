@@ -139,7 +139,7 @@ body {
   color: var(--color-dark);
 }
 
-.dark .productPage .descriptionPart p,
+.dark .productPage p,
 .dark .productPage h2{
   color: var(--color-dark);
 }

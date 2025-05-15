@@ -19,7 +19,7 @@ const ResponsiveMenu = ({ open }) => {
     <div 
       role="menu" 
       aria-label="Responsive Navigation Menu"
-      className="absolute top-16 right-0 w-[70%] max-w-xs bg-green-500 text-white z-20 rounded-3xl shadow-lg p-6 animate__animated animate__fadeInDown"
+      className="absolute top-16 right-0 w-[70%] max-w-xs  bg-green-500 text-white z-[9999] rounded-3xl shadow-lg p-6 animate__animated animate__fadeInDown"
     >
       <ul className="flex flex-col items-center gap-6">
         {menuItems.map(({ path, label }) => {

@@ -35,10 +35,7 @@ const Cart = () => {
   }
 
   const handleOrder = () => {
-    // Orderni orders arrayiga qo'shamiz
     setOrders((prev) => [...prev, ...cartItems]);
-
-    // Savatni bo'shatamiz
     clearCart();
 
     alert(`Your order for $${totalPrice.toFixed(2)} has been placed successfully!`);
@@ -50,9 +47,10 @@ const Cart = () => {
 
       <div className="tableContent overflow-x-auto" role="table" aria-label="Cart items table">
         <table className="w-full table-auto border-collapse">
-          <thead className="bg-gray-200 text-left text-sm text-gray-700 uppercase">
+          <thead className="bg-gray-200 text-left  text-sm text-gray-700 uppercase">
             <tr>
               <th>Product</th>
+              <th>Title</th>
               <th>Price</th>
               <th>Quantity</th>
               <th>Remove</th>
@@ -61,21 +59,21 @@ const Cart = () => {
           <tbody>
             {cartItems.map((item) => (
               <tr key={item.id} className="border-b border-green-300">
-                <td className="p-4 flex items-center gap-10">
+                <td>
                   <img 
                     src={item.image} 
                     alt={item.title} 
                     className="w-16 h-16 object-contain"
                   />
-                  <p className="font-medium">{item.title}</p>
                 </td>
+                <td><p className="font-medium">{item.title}</p></td>
 
                 <td className="p-4 font-semibold">
                   ${(item.price * item.quantity).toFixed(2)}
                 </td>
 
                 <td>
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-1">
                     <button
                       onClick={() => decrementItem(item.id)}
                       className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition"

@@ -15,7 +15,7 @@
   border-radius: 10px;
   box-shadow: 5px 5px 15px var(--black);
   overflow: hidden;
-  margin: 40px 0;
+  margin: 4rem 3rem;
 }
 
 .accordion__item {
@@ -72,7 +72,12 @@
 }
 
 
-
+.chatWrap{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3rem;
+}
 
 @media (max-width: 780px) {
   .commentSection{
@@ -105,8 +110,11 @@
 }
 
 @media (max-width: 550px) {
-  .accordion {
-    width: 95%;
+  .commentSection{
+    padding: 20px;
+  }
+  .commentSection .accordion {
+   width: 100%;
   }
 
   .accordion__title {
@@ -119,7 +127,7 @@
   }
 
   .accordion__content {
-    padding: 10px 15px; 
+    padding: 0 15px; 
   }
 
    .chatWrap{

@@ -1,0 +1,8 @@
+@media (max-width:780px) {
+  .productPage{
+    padding: 4rem;
+  }
+  .descriptionWrapper{
+    margin-left:4rem;
+  }
+}

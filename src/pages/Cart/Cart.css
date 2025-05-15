@@ -37,3 +37,28 @@
 .cartWrapper .total button{
   padding: 0.5rem 1rem;
 }
+
+@media (max-width: 780px) {
+  .cartWrapper{
+    padding: 3rem 0;
+  }
+
+}
+
+@media (max-width: 550px) {
+  .cartWrapper{
+    padding: 2rem 0;
+  }
+  .cartWrapper .tableContent thead tr{
+    display: flex;
+    align-items: center;
+    gap: 3.7rem;
+  }
+
+  .cartWrapper .tableContent tbody tr{
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+  }
+
+}

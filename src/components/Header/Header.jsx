@@ -62,7 +62,7 @@ const toggleMenuState = (key) => {
     }
     window.location.href = "/login";
   };
-
+const user = JSON.parse(localStorage.getItem("user")) || {};
 
 
 
@@ -163,7 +163,7 @@ const toggleMenuState = (key) => {
           </button>
         </nav>
 
-     <div className="relative">
+   
             <button
               onClick={() => toggleMenuState("openProfile")}
               className='mode'
@@ -171,29 +171,28 @@ const toggleMenuState = (key) => {
             >
               <AiOutlineUser className='icon' size={24} />
             </button>
-            {menuState.openProfile && (
-              <div className="absolute flex flex-col items-center justify-center gap-3 right-0 mt-2 w-58 h-24  bg-neutral-800 text-center rounded-[10px] shadow-lg py-2 z-50">
-                <p className="px-4 py-2 text-white text-xl">
-                  {JSON.parse(localStorage.getItem("user"))?.firstName || "User"}{" "}
-                  {JSON.parse(localStorage.getItem("user"))?.lastName || ""}
-                </p>
-                <button
-                  className="mode flex items-center justify-center gap-1 text-xl w-[80%] text-center px-4 py-2 text-neutral-800 hover:bg-gray-200"
-                  onClick={handleProfileClick}
-                >
-                <span> <AiOutlineLogout className='icon' size={20}/> </span>Logout
-                </button>
-              </div>
-            )}
-          </div>
-
-
+           
          <button className='mode' onClick={toggleDarkMode} aria-label={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}>
             {darkMode ? <BsSun className='icon' size={24} /> : <BsMoon className='icon' size={24} />}
           </button>
 
-        <ResponsiveMenu open={menuState.open} />
+      
       </header>
+  <ResponsiveMenu open={menuState.open} />
+  {menuState.openProfile && (
+  <div className="fixed flex flex-col gap-3 top-16 right-4 w-64 h-20 bg-black text-white  rounded-lg shadow-2xl p-4 z-[9999] space-y-4 transition-all animate__animated animate__fadeInDown">
+    <p className="px-4 py-2 text-white text-center text-xl">
+      {user?.firstName || "User"} {user?.lastName || ""}
+    </p>
+    <button
+      onClick={handleProfileClick}
+       className="logoutBtn flex items-center bg-green-600 justify-center gap-1 text-xl w-[80%] text-center px-4 py-2 text-neutral-800 hover:bg-gray-200 rounded-lg"
+    >
+      <AiOutlineLogout  className='icon' size={20} />
+      Logout
+    </button>
+  </div>
+)}
 
      {menuState.sidebarOpen && (
         <Sidebar
