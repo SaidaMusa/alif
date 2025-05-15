@@ -59,15 +59,22 @@ const TypeFilter = () => {
       </div>
 
     
-      <div className="flex flex-wrap justify-center gap-6">
-        {displayItems.length > 0 ? (
-          displayItems.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))
-        ) : (
-          <p className="text-center text-gray-500 text-lg">No products found.</p>
-        )}
+      <div
+  role="list"
+  className="flex flex-wrap justify-center gap-6"
+  aria-label="Filtered product list"
+>
+  {displayItems.length > 0 ? (
+    displayItems.map((product) => (
+      <div key={product.id} role="listitem">
+        <ProductCard product={product} />
       </div>
+    ))
+  ) : (
+    <p className="text-center text-gray-500 text-lg">No products found.</p>
+  )}
+</div>
+
 
 
       {filteredItems.length > VISIBLE_COUNT && (

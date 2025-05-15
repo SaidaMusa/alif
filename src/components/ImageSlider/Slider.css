@@ -1,8 +1,15 @@
+:root{
+--dark-color: #333;
+--gray-color: rgb(206, 205, 205);
+--white-color: #fff;
+}
+
+
 main {
   position: relative;
   width: 100%;
   height: 600px;
-  box-shadow: 0 3px 10px var(--black);
+  box-shadow: 0 3px 10px var(--dark-color);
 }
 
 .item {
@@ -16,7 +23,7 @@ main {
   background-position: center;
   background-size: cover;
   border-radius: 20px;
-  box-shadow: 0 20px 30px var(--gray) inset;
+  box-shadow: 0 20px 30px var(--white-color) inset;
   transition: transform 0.1s, left 0.75s, top 0.75s, width 0.75s, height 0.75s;
 
   &:nth-child(1), &:nth-child(2) {
@@ -43,8 +50,8 @@ main {
   left: 3rem;
   transform: translateY(-50%);
   font: 400 0.85rem helvetica,sans-serif;
-  color: var(--white);
-  text-shadow: 0 3px 8px var(--gray);
+  color: var(--white-color);
+  text-shadow: 0 2px 4px var(--gray-color);
   opacity: 0;
   display: none;
 
@@ -61,9 +68,9 @@ main {
 
   & button {
     width: fit-content;
-    background-color: var(--gray);
-    color: var(--white);
-    border: 2px solid var(--white);
+    background-color: var(--gray-color);
+    color: var(--white-color);
+    border: 2px solid var(--white-color);
     border-radius: 0.25rem;
     padding: 0.75rem;
     cursor: pointer;
@@ -95,16 +102,16 @@ main {
   user-select: none;
 
   & .btn {
-    background-color: var(--gray);
+    background-color: var(--gray-color);
     color: var(--gray);
-    border: 2px solid var(--gray);
+    border: 2px solid var(--gray-color);
     margin: 0 0.25rem;
     padding: 24px 20px;
     border-radius: 50%;
     cursor: pointer;
 
     &:hover {
-      background-color: var(--whiteGray);
+      background-color: var(--white-color);
     }
   }
 }

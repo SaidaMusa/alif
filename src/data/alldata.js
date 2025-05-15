@@ -1,6 +1,5 @@
 export const allData = [
   // Smartphones and gadgets
-// Smartphones and gadgets
 {
   title: "Smartphone",
   description: "Xiaomi Redmi 12C 4/128 GB (Global), green",

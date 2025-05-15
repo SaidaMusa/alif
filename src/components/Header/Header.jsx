@@ -85,15 +85,16 @@ const toggleMenuState = (key) => {
 
           <div className="btns flex items-center justify-center gap-[10px]">
             <form className="flex items-center gap-[5px]" onSubmit={(e) => e.preventDefault()}>
-              <Link to="/catalog" aria-label="Open Catalogs">
-                <button
-                  type="button"
-                  className="bg-green-600 hover:bg-green-500 rounded-[8px] gap-2 focus:outline-2 focus:outline-offset-2 focus:outline-green-700"
-                  aria-label="Open Catalogs"
-                >
-                  <AiOutlineBars size={24} /> Catalogs
-                </button>
-              </Link>
+             <Link to="/catalog" aria-label="Open Catalogs">
+  <button
+    type="button"
+    className="bg-green-700 hover:bg-green-800 text-black rounded-[8px] gap-2 px-4 py-2 focus:outline-2 focus:outline-offset-2 focus:outline-green-800"
+    aria-label="Open Catalogs"
+  >
+    <AiOutlineBars className='icon' size={24} /> Catalogs
+  </button>
+</Link>
+
 
               <label className="flex items-center gap-5">
                 <div className="relative flex items-center">
@@ -105,7 +106,7 @@ const toggleMenuState = (key) => {
                     onChange={handleSearchChange}
                     aria-label="Search products"
                   />
-                  <span className="icon absolute right-0 top-1/2 transform -translate-y-1/2 bg-green-600 text-white p-2">
+                  <span className="iconSearch absolute right-0 top-1/2 transform -translate-y-1/2 bg-green-600 text-white p-2">
                     <AiOutlineSearch size={25} />
                   </span>
                 </div>
@@ -113,53 +114,62 @@ const toggleMenuState = (key) => {
             </form>
           </div>
 
-          <ul className="flex items-center justify-between gap-[40px] relative">
-            <li className="relative flex items-center">
-              <Link to="/cart" className="text-xl hover:text-green-600">
-                <AiOutlineShoppingCart size={28} />
-              </Link>
-              {cartCount>0 && (
-                <span className="absolute -top-3 -right-3 bg-green-500 text-white text-xs w-6 h-6 flex items-center justify-center rounded-full font-bold">
-                  {cartCount}
-                </span>
-              )}
-            </li>
+         <ul className="flex items-center justify-between gap-[40px] relative">
+  <li className="relative flex items-center">
+    <Link
+      to="/cart"
+      className="text-xl hover:text-green-600"
+      aria-label="Shopping Cart"
+    >
+      <AiOutlineShoppingCart size={28} />
+    </Link>
+    {cartCount > 0 && (
+      <span className="absolute -top-3 -right-3 bg-green-600 text-white text-xs w-6 h-6 flex items-center justify-center rounded-full font-bold">
+        {cartCount}
+      </span>
+    )}
+  </li>
 
-            <li className="relative flex items-center">
-              <Link to="/wishlist" className="text-xl hover:text-green-600">
-                <AiOutlineHeart size={28} />
-              </Link>
-              {wishlistCount > 0 && (
-                <span className="absolute -top-3 -right-3 bg-green-500 text-white text-xs w-6 h-6 flex items-center justify-center rounded-full font-bold">
-                  {wishlistCount}
-                </span>
-              )}
-            </li>
+  <li className="relative flex items-center">
+    <Link
+      to="/wishlist"
+      className="text-xl hover:text-green-600"
+      aria-label="Wishlist"
+    >
+      <AiOutlineHeart size={28} />
+    </Link>
+    {wishlistCount > 0 && (
+      <span className="absolute -top-3 -right-3 bg-green-600 text-white text-xs w-6 h-6 flex items-center justify-center rounded-full font-bold">
+        {wishlistCount}
+      </span>
+    )}
+  </li>
 
-            <li>
-              <Link to="/stats" className="hover:text-cyan-600">
-                <AiOutlineBarChart size={24} />
-              </Link>
-            </li>
+  <li>
+    <Link to="/stats" className="hover:text-green-600" aria-label="Statistics">
+      <AiOutlineBarChart size={24} />
+    </Link>
+  </li>
 
-            <li>
-              <Link to="/comment" className="hover:text-cyan-600">
-                <AiOutlineComment size={25} />
-              </Link>
-            </li>
-          </ul>
+  <li>
+    <Link to="/comment" className="hover:text-green-600" aria-label="Comments">
+      <AiOutlineComment size={25} />
+    </Link>
+  </li>
+</ul>
 
-          <button  onClick={() => toggleMenuState("open")}  aria-label={menuState.open ? "Close Menu" : "Open Menu"}>
-            <AiOutlineBars size={24} />
+          <button className='mode'  onClick={() => toggleMenuState("open")}  aria-label={menuState.open ? "Close Menu" : "Open Menu"}>
+            <AiOutlineBars className='icon' size={24} />
           </button>
         </nav>
 
      <div className="relative">
             <button
               onClick={() => toggleMenuState("openProfile")}
+              className='mode'
               aria-label={menuState.openProfile ? "Close Profile" : "Open Profile"}
             >
-              <AiOutlineUser size={24} />
+              <AiOutlineUser className='icon' size={24} />
             </button>
             {menuState.openProfile && (
               <div className="absolute flex flex-col items-center justify-center gap-3 right-0 mt-2 w-58 h-24  bg-neutral-800 text-center rounded-[10px] shadow-lg py-2 z-50">
@@ -168,18 +178,18 @@ const toggleMenuState = (key) => {
                   {JSON.parse(localStorage.getItem("user"))?.lastName || ""}
                 </p>
                 <button
-                  className="flex items-center justify-center gap-1 text-xl w-[80%] text-center px-4 py-2 text-neutral-800 hover:bg-gray-200"
+                  className="mode flex items-center justify-center gap-1 text-xl w-[80%] text-center px-4 py-2 text-neutral-800 hover:bg-gray-200"
                   onClick={handleProfileClick}
                 >
-                <span> <AiOutlineLogout size={20}/> </span>Logout
+                <span> <AiOutlineLogout className='icon' size={20}/> </span>Logout
                 </button>
               </div>
             )}
           </div>
 
 
-         <button onClick={toggleDarkMode} aria-label={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}>
-            {darkMode ? <BsSun size={24} /> : <BsMoon size={24} />}
+         <button className='mode' onClick={toggleDarkMode} aria-label={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}>
+            {darkMode ? <BsSun className='icon' size={24} /> : <BsMoon className='icon' size={24} />}
           </button>
 
         <ResponsiveMenu open={menuState.open} />

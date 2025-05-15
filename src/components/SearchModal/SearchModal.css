@@ -26,3 +26,8 @@
   margin-top: 20px;
 }
 
+@media (max-width: 550px) {
+.cards{
+  padding-left: 5rem;
+}  
+}

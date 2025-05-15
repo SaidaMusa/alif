@@ -59,21 +59,24 @@ const CategoryCard = ({ visibleCount = 8 }) => {
       </div>
 
   
-      <div
-        className="customCards grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
-        role="list"
-        aria-label="Product Cards"
-      >
-        {displayItems.length > 0 ? (
-          displayItems.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))
-        ) : (
-          <p className="text-center text-gray-500 col-span-full" aria-live="assertive">
-            {noProductsMessage}
-          </p>
-        )}
+     <div
+  className="customCards grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
+  role="list"
+  aria-label="Product Cards"
+>
+  {displayItems.length > 0 ? (
+    displayItems.map((product) => (
+      <div key={product.id} role="listitem">
+        <ProductCard product={product} />
       </div>
+    ))
+  ) : (
+    <p className="text-center text-gray-500 col-span-full" aria-live="assertive">
+      {noProductsMessage}
+    </p>
+  )}
+</div>
+
 
     
       {filteredData.length > visibleCount && (

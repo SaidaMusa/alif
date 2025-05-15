@@ -3,7 +3,7 @@ import { AiOutlineMobile, AiOutlineLaptop, AiOutlineTablet, AiOutlineAudio, AiOu
 import { GiSmartphone, GiCookingPot, GiHealthPotion, GiGamepad } from "react-icons/gi";
 import { BsTv, BsTools, BsWatch } from "react-icons/bs";
 import { FaCar, FaBaby } from "react-icons/fa";
-import "../SideBar/Sidebar.css";
+import "./Sidebar.css";
 
 const categoryNames = {
   "Smartphones and gadgets": "Smartphones",
