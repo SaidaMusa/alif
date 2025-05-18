@@ -180,13 +180,13 @@ const user = JSON.parse(localStorage.getItem("user")) || {};
       </header>
   <ResponsiveMenu open={menuState.open} />
   {menuState.openProfile && (
-  <div className="fixed flex flex-col gap-3 top-16 right-4 w-64 h-20 bg-black text-white  rounded-lg shadow-2xl p-4 z-[9999] space-y-4 transition-all animate__animated animate__fadeInDown">
+  <div className="fixed flex flex-col gap-3 top-14 right-45 w-64 h-20 bg-black text-white  rounded-lg shadow-2xl p-4 z-[9999] space-y-4 transition-all animate__animated animate__fadeInDown">
     <p className="px-4 py-2 text-white text-center text-xl">
       {user?.firstName || "User"} {user?.lastName || ""}
     </p>
     <button
       onClick={handleProfileClick}
-       className="logoutBtn flex items-center bg-green-600 justify-center gap-1 text-xl w-[80%] text-center px-4 py-2 text-neutral-800 hover:bg-gray-200 rounded-lg"
+       className="logoutBtn flex items-center bg-green-600 justify-center gap-1 text-lg w-[80%] text-center px-4 py-2 text-neutral-800 hover:bg-gray-200 rounded-lg"
     >
       <AiOutlineLogout  className='icon' size={20} />
       Logout

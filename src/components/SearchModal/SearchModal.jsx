@@ -26,13 +26,6 @@ const SearchModal = ({ isOpen, onClose, searchTerm, filtered = [] }) => {
           <AiOutlineClose />
         </button>
 
-        <h2
-          id="search-modal-title"
-          className="text-xl font-semibold mb-6"
-        >
-          Search Results for: "{searchTerm}"
-        </h2>
-
         {filtered.length === 0 ? (
           <p className="text-center text-gray-500 text-4xl">No products found.</p>
         ) : (

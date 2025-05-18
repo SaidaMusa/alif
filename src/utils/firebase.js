@@ -1,5 +1,3 @@
-// src/firebase.js
-
 import { initializeApp } from "firebase/app";
 import { getAnalytics, logEvent } from "firebase/analytics";
 
@@ -13,13 +11,13 @@ const firebaseConfig = {
   measurementId: "G-MKQ4B3JQPS"
 };
 
-// Firebase'ni boshlatish
+
 const app = initializeApp(firebaseConfig);
 
-// Analytics'ni boshlatish
+
 export const analytics = getAnalytics(app);
 
-// Eventlarni log qilish funksiyasi
+
 export const logAnalyticsEvent = (eventName, eventParams) => {
   logEvent(analytics, eventName, eventParams);
 };

@@ -22,10 +22,8 @@ export default function Chatbot() {
         },
         {
           headers: {
-            'Authorization': 'Bearer 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',
+            'Authorization': 'Bearer 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',
             'Content-Type': 'application/json',
-            'HTTP-Referer': window.location.origin,
-            'X-Title': 'My Chatbot',
           },
         }
       );
@@ -37,10 +35,18 @@ export default function Chatbot() {
 
       setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
-      console.error('Xatolik:', error);
+      if (error.response) {
+        console.error("📛 Status:", error.response.status);
+        console.error("📛 Answer:", error.response.data);
+      } else if (error.request) {
+        console.error("📛 The request was sent, but there was no response:", error.request);
+      } else {
+        console.error("📛 Error in request configuration:", error.message);
+      }
+
       setMessages((prev) => [
         ...prev,
-        { sender: 'bot', text: '❌ Javobni olishda xatolik yuz berdi.' },
+        { sender: 'bot', text: '❌ An error occurred while receiving the response' },
       ]);
     }
   };
@@ -52,7 +58,7 @@ export default function Chatbot() {
           height: 300,
           overflowY: 'auto',
           border: '1px solid #ccc',
-          backgroundColor:'white',
+          backgroundColor: 'white',
           padding: 10,
           borderRadius: '18px',
         }}
@@ -65,7 +71,7 @@ export default function Chatbot() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4 }}
           >
-            <strong>{msg.sender}: {msg.text}</strong> 
+            <strong>{msg.sender}: {msg.text}</strong>
           </motion.div>
         ))}
       </div>
@@ -74,16 +80,15 @@ export default function Chatbot() {
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={(e) => e.key === 'Enter' && handleSend()}
         placeholder="Message..."
-         aria-label="Message input"
-         aria-describedby="inputDescription"
+        aria-label="Message input"
         style={{
           width: '100%',
           padding: 25,
           marginTop: 10,
           marginBottom: 30,
           outline: 'none',
-          backgroundColor:'white',
-          color:'black',
+          backgroundColor: 'white',
+          color: 'black',
           border: '1px solid #ccc',
           borderRadius: '18px',
           boxShadow: '0 0 7px #ccc',
@@ -92,5 +97,3 @@ export default function Chatbot() {
     </div>
   );
 }
-
-

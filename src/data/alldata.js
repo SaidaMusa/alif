@@ -621,7 +621,7 @@ export const allData = [
   description: "Electric kettle Bosch TWK70B03, black",
   price: 1073149,
   images: [
-    "https://smarthomeappliances.uz/wp-content/uploads/2024/01/TWK70B03-scaled.jpg",
+    "https://tezz.uz/uploads/images/product/534/thumbs/209182-10501050.jpg",
   ],
   type: "Kitchen appliances",
   brand: "BOSCH",
@@ -641,7 +641,7 @@ export const allData = [
   description: "Coffee maker Bosch TKA8011",
   price: 1556923,
   images: [
-    "https://smarthomeappliances.uz/wp-content/uploads/2024/01/TKA8011-scaled.jpg",
+    "https://sodda.uz/storage/products/thumbs/aSBWkkFPqrnKGIBfCDLPofz1ZMNhQnoEeDdadcSe.webp",
     "https://minio.alifshop.uz/shop/rand/2c/ef/4d/2cef4d74-76ed-49d2-959a-f92aa15524c0.jpg",
   ],
   type: "Kitchen appliances",
@@ -1582,5 +1582,5 @@ function addID(allData) {
 
 const data = addID(allData);
 
-// Shu yerini to'g'rilaymiz:
+
 export default data;
