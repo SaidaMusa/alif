@@ -22,7 +22,7 @@ export default function Chatbot() {
         },
         {
           headers: {
-            'Authorization': 'Bearer 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',
+            'Authorization': 'Bearer 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',
             'Content-Type': 'application/json',
           },
         }
